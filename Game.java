@@ -19,7 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -28,21 +28,18 @@ public class Game
         createRooms();
         parser = new Parser();
     }
-
-    /**
-     * Create all the rooms and link their exits together.
-     */
-    private void createRooms()
+    
+    /*private void createRooms()
     {
         Room outside, theater, pub, lab, office;
-      
+
         // create the rooms
         outside = new Room("outside the main entrance of the university");
         theater = new Room("in a lecture theater");
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
-        
+
         // initialise room exits
         outside.setExits(null, theater, lab, pub);
         theater.setExits(null, null, null, outside);
@@ -51,6 +48,29 @@ public class Game
         office.setExits(null, null, null, lab);
 
         currentRoom = outside;  // start game outside
+    }*/
+    
+    /**
+     * Create all the rooms and link their exits together.
+     */
+    private void createRooms(){
+        Room a,b,c,d,entrada;
+
+        //Create rooms
+        entrada = new Room("in entrance of the building");
+        a = new Room("in first room rigth");
+        b = new Room("in first room lefth");
+        c = new Room("in first room in front of you, you´ve found the pump");
+        d = new Room("in second room in front of you");
+
+        // initialise room exits
+        entrada.setExits(a, b, c, d);
+        a.setExits(null, entrada, null, null);
+        b.setExits(null, null, null, entrada);
+        c.setExits(null, null, entrada, null);
+        d.setExits(null, null,  entrada, null);
+
+        currentRoom = entrada;  // start game outside
     }
 
     /**
@@ -62,7 +82,7 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-                
+
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
