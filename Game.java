@@ -54,19 +54,19 @@ public class Game
      * Create all the rooms and link their exits together.
      */
     private void createRooms(){
-        Room a,b,c,d,entrada;
+        Room dam,exams,secretariat,entrada;
 
         //Create rooms
-        entrada = new Room("in entrance of the building");
-        a = new Room("in first room rigth");
-        b = new Room("in first room lefth");
-        c = new Room("in first room in front of you, you´ve found the pump");
+        entrada = new Room("in entrance of the institute");
+        dam = new Room("in DAM classroom ");
+        exams = new Room("in exams clasroom");
+        secretariat = new Room("in secretariat room, you´ve found the pump");
 
         // initialise room exits
-        entrada.setExits(a, b, null,c);
-        a.setExits(null, entrada, null, null);
-        b.setExits(null, null, null, entrada);
-        c.setExits(null, null, entrada, null);
+        entrada.setExits(secretariat, exams, null,dam);
+        dam.setExits(null, entrada, null, null);
+        exams.setExits(null, null, null, entrada);
+        secretariat.setExits(null, null, entrada, null);
 
         currentRoom = entrada;  // start game outside
     }
