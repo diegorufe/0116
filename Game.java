@@ -61,14 +61,12 @@ public class Game
         a = new Room("in first room rigth");
         b = new Room("in first room lefth");
         c = new Room("in first room in front of you, you´ve found the pump");
-        d = new Room("in second room in front of you");
 
         // initialise room exits
-        entrada.setExits(a, b, c, d);
+        entrada.setExits(a, b, null,c);
         a.setExits(null, entrada, null, null);
         b.setExits(null, null, null, entrada);
         c.setExits(null, null, entrada, null);
-        d.setExits(null, null,  entrada, null);
 
         currentRoom = entrada;  // start game outside
     }
