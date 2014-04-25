@@ -14,12 +14,12 @@
  */
 public class Room 
 {
-    public String description;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room westExit;
-    public Room southEastExit;
+    private String description;
+    private Room northExit;
+    private Room southExit;
+    private Room eastExit;
+    private Room westExit;
+    private Room southEastExit;
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -61,4 +61,44 @@ public class Room
         return description;
     }
 
+    /**
+     * @param direccion es la direccion mediante la cual queremos obtenera el atributo Room
+     * @return the Room o null sino existe.
+     */
+    public Room getExit(String direccion){
+        Room room = null;
+        if(direccion.equals("north")){
+            room=northExit;
+        }else if(direccion.equals("east")){
+            room=eastExit;
+        }else if(direccion.equals("south")){
+            room=southExit;
+        }else if(direccion.equals("west")){
+            room=westExit;
+        }else if(direccion.equals("southEast")){
+            room=southEastExit;
+        }
+        return room;
+    }
+
+    /**
+     * Return a description of the room's exits.
+     * For example: "Exits: north east west"
+     *
+     * @ return A description of the available exits.
+     */
+    public String getExitString(){
+        String exitString = "Exits: ";
+        if(northExit != null)
+            exitString = exitString+"north ";
+        if(eastExit != null)
+             exitString = exitString+"east ";
+        if(southExit != null)
+            exitString = exitString+"south ";
+        if(westExit != null)
+             exitString = exitString+"west ";
+        if(southEastExit != null)
+             exitString = exitString+"southEast ";
+        return exitString;
+    }
 }
