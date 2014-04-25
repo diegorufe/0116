@@ -70,7 +70,7 @@ public class Game
         exams.setExits(null, null, null, entrada,null,null);
         secretariat.setExits(null, null, entrada, null,null,null);
         playground.setExits(null,null,null,entrada,null,null);
-        gym.setExits(null,entrada,null,null,null,null);
+        gym.setExits(null,null,null,entrada,null,null);
 
         currentRoom = entrada;  // start game outside
     }
