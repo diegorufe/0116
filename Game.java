@@ -65,12 +65,16 @@ public class Game
         gym = new Room("in the gym");
 
         // initialise room exits
-        entrada.setExits(secretariat, exams, null,dam,playground,gym);
-        dam.setExits(null, entrada, null, null,null,null);
-        exams.setExits(null, null, null, entrada,null,null);
-        secretariat.setExits(null, null, entrada, null,null,null);
-        playground.setExits(null,null,null,entrada,null,null);
-        gym.setExits(null,null,null,entrada,null,null);
+        entrada.setExit("north",secretariat);
+        entrada.setExit("east",exams);
+        entrada.setExit("west", dam);
+        entrada.setExit("southEast",playground);
+        entrada.setExit("northWest",gym);
+        dam.setExit("east",entrada);
+        exams.setExit("west",entrada);
+        secretariat.setExit("south",entrada);
+        playground.setExit("west",entrada);
+        gym.setExit("west",entrada);
 
         currentRoom = entrada;  // start game outside
     }
