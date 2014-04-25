@@ -54,19 +54,21 @@ public class Game
      * Create all the rooms and link their exits together.
      */
     private void createRooms(){
-        Room dam,exams,secretariat,entrada;
+        Room dam,exams,secretariat,entrada,playground;
 
         //Create rooms
         entrada = new Room("in entrance of the institute");
         dam = new Room("in DAM classroom ");
         exams = new Room("in exams clasroom");
         secretariat = new Room("in secretariat room, you´ve found the pump");
+        playground = new Room("in the playground");
 
         // initialise room exits
-        entrada.setExits(secretariat, exams, null,dam);
-        dam.setExits(null, entrada, null, null);
-        exams.setExits(null, null, null, entrada);
-        secretariat.setExits(null, null, entrada, null);
+        entrada.setExits(secretariat, exams, null,dam,playground);
+        dam.setExits(null, entrada, null, null,null);
+        exams.setExits(null, null, null, entrada,null);
+        secretariat.setExits(null, null, entrada, null,null);
+        playground.setExits(null,null,null,entrada,null);
 
         currentRoom = entrada;  // start game outside
     }
@@ -174,6 +176,9 @@ public class Game
         if(direction.equals("west")) {
             nextRoom = currentRoom.westExit;
         }
+        if(direction.equals("southEast")) {
+            nextRoom = currentRoom.southEastExit;
+        }
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
@@ -217,6 +222,9 @@ public class Game
         }
         if(currentRoom.westExit != null) {
             System.out.print("west ");
+        }
+        if(currentRoom.southEastExit !=null){
+            System.out.print("southEast");
         }
         System.out.println();
     }
