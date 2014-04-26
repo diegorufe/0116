@@ -199,8 +199,7 @@ public class Game
      * Metodo para evitar la repeticion de codigo e informar donde estamos situados
      */
     private void printLocationInfo(){
-        System.out.println("You are " + currentRoom.getDescription());
-        System.out.print(currentRoom.getExitString());
+        System.out.println(currentRoom.getLongDescription());
         System.out.println();
     }
 }
