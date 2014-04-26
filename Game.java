@@ -133,6 +133,8 @@ public class Game
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
+        }else if (commandWord.equals("look")) {
+            printLocationInfo();
         }
 
         return wantToQuit;
