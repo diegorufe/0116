@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Set;
 /**
  * This class is part of the "World of Zuul" application. 
  * "World of Zuul" is a very simple, text based adventure game.  
@@ -12,16 +14,23 @@
 public class CommandWords
 {
     // a constant array that holds all valid command words
-    private static final String[] validCommands = {
-            "go", "quit", "help", "look" , "eat", "back" , "take" , "drop","ir","salir","ayuda","ver","comer","volver","coger","soltar"
-        };
+    private static HashMap<String,Option> validCommands;
+    Option option;    
 
     /**
      * Constructor - initialise the command words.
      */
     public CommandWords()
     {
-        // nothing to do at the moment...
+        validCommands = new HashMap<String,Option>();
+        validCommands.put("go",option.GO);
+        validCommands.put("quit",option.QUIT);
+        validCommands.put("help",option.HELP);
+        validCommands.put("look",option.LOOK);
+        validCommands.put("eat",option.EAT);
+        validCommands.put("back",option.BACK);
+        validCommands.put("take",option.TAKE);
+        validCommands.put("drop",option.DROP);
     }
 
     /**
@@ -31,8 +40,8 @@ public class CommandWords
      */
     public boolean isCommand(String aString)
     {
-        for(int i = 0; i < validCommands.length; i++) {
-            if(validCommands[i].equals(aString))
+        for(int i = 0; i < validCommands.size(); i++) {
+            if(validCommands.containsKey(aString))
                 return true;
         }
         // if we get here, the string was not found in the commands
@@ -44,8 +53,9 @@ public class CommandWords
      */
     public void showAll(){
         String comandos = "";
-        for(int i=0;i<validCommands.length;i++){
-            comandos = comandos+validCommands[i]+", ";
+        Set<String> keys = validCommands.keySet();
+        for(String key:keys){
+            comandos=comandos+key+", ";
         }
         System.out.println("Your command words are:");
         System.out.println(comandos);
