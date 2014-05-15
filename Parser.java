@@ -38,7 +38,7 @@ public class Parser
         String inputLine;   // will hold the full input line
         String word1 = null;
         String word2 = null;
-
+        Option option = Option.UNKNOWN;
         System.out.print("> ");     // print prompt
 
         inputLine = reader.nextLine();
@@ -56,10 +56,11 @@ public class Parser
         // Now check whether this word is known. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
         if(commands.isCommand(word1)) {
-            return new Command(word1, word2);
+            option=commands.getCommandWord(word1);
+            return new Command(option, word2);
         }
         else {
-            return new Command(null, word2); 
+            return new Command(option, word2); 
         }
     }
     
