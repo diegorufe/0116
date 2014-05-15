@@ -60,4 +60,18 @@ public class CommandWords
         System.out.println("Your command words are:");
         System.out.println(comandos);
     }
+
+    /**
+     * Return the Option associated with a word.
+     * @param commandWord The word to look up (as a string).
+     * @return The Option correspondng to commandWord, or UNKNOWN
+     *         if it is not a valid command word.
+     */
+    public Option getCommandWord(String commandWord){
+        Option option =  Option.UNKNOWN;
+        if(validCommands.containsKey(commandWord)){
+            option = validCommands.get(commandWord);
+        }
+        return option;
+    }
 }
