@@ -55,7 +55,7 @@ public class Parser
 
         // Now check whether this word is known. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
-        if(commands.isCommand(word1)) {
+        if(commands.getCommandWord(word1) != Option.UNKNOWN) {
             option=commands.getCommandWord(word1);
             return new Command(option, word2);
         }
