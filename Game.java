@@ -95,7 +95,7 @@ public class Game
         System.out.println();
         System.out.println("Welcome to the World of Zuul!");
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type "+ "'"+option.allCommands()+"' "+"if you need help.");
+        System.out.println("Type "+ "'"+option.getComando()+"' "+"if you need help.");
         System.out.println();
         player.look();
     }
@@ -114,24 +114,39 @@ public class Game
         }
 
         Option commandWord = command.getCommandWord();
-        if (commandWord == Option.HELP) {
+        switch(commandWord){
+            case HELP:
             printHelp();
-        }
-        else if (commandWord  == Option.GO){
+            break;
+
+            case GO:
             goRoom(command);
-        }
-        else if (commandWord  == Option.QUIT) {
+            break;
+
+            case QUIT: 
             wantToQuit = quit(command);
-        }else if (commandWord  == Option.LOOK) {
+            break;
+
+            case LOOK:
             player.look();
-        }else if (commandWord  == Option.EAT) {
+            break;
+
+            case EAT:
             player.remenberEat();
-        }else if (commandWord  == Option.BACK) {
+            break;
+
+            case BACK:
             player.returnRoom();
-        } else if (commandWord  == Option.TAKE) {
+            break;
+
+            case TAKE:
             take(command);
-        }  else if (commandWord  == Option.DROP) {
+            break;
+
+            case DROP:
             drop(command);
+            break;
+
         }
         return wantToQuit;
     }

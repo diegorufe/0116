@@ -14,31 +14,22 @@ import java.util.Set;
 public class CommandWords
 {
     // a constant array that holds all valid command words
-    private static HashMap<String,Option> validCommands;
-    Option option;    
-
+    private static HashMap<String,Option> validCommands;   
+    
     /**
      * Constructor - initialise the command words.
      */
     public CommandWords()
     {
         validCommands = new HashMap<String,Option>();
-        validCommands.put("go",option.GO);
-        validCommands.put("quit",option.QUIT);
-        validCommands.put("help",option.HELP);
-        validCommands.put("look",option.LOOK);
-        validCommands.put("eat",option.EAT);
-        validCommands.put("back",option.BACK);
-        validCommands.put("take",option.TAKE);
-        validCommands.put("drop",option.DROP);
-        validCommands.put("ir",option.GO);
-        validCommands.put("salir",option.QUIT);
-        validCommands.put("ayudar",option.HELP);
-        validCommands.put("mirar",option.LOOK);
-        validCommands.put("comer",option.EAT);
-        validCommands.put("volver",option.BACK);
-        validCommands.put("coger",option.TAKE);
-        validCommands.put("soltar",option.DROP);
+        validCommands.put("ir",Option.GO);
+        validCommands.put("salir",Option.QUIT);
+        validCommands.put("ayuda",Option.HELP);
+        validCommands.put("mirar",Option.LOOK);
+        validCommands.put("comer",Option.EAT);
+        validCommands.put("volver",Option.BACK);
+        validCommands.put("coger",Option.TAKE);
+        validCommands.put("soltar",Option.DROP);
     }
 
     /**

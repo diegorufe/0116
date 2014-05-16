@@ -7,36 +7,17 @@
  */
 public enum Option
 {
-    GO("go","ir"), QUIT("quit","salir"), HELP("help","ayuda"), LOOK("look","mirar") , EAT("eat","comer"), BACK("back","volver") , TAKE("take","coger") , DROP("drop","dejar"),UNKNOWN("unknown","nose");
-    private String comandoIngles;
-    private String comandoEspanol;
-
-    Option(String comandoIngles,String comandoEspanol){
-        this.comandoIngles = comandoIngles;
-        this.comandoEspanol = comandoEspanol;
+    GO("ir"), QUIT("salir"), HELP("ayuda"), LOOK("mirar") , EAT("comer"), BACK("volver") , TAKE("coger") , DROP("dejar"),UNKNOWN("nose");
+    private String comando;
+    Option(String comando){
+        this.comando = comando;
     }
-    
+     
     /**
-     * Metodo para opterner el comando en ingles
-     * @return un string con el comando en ingles
+     * Metodo para opterner el comando
+     * @return un string con el comando
      */
-    public String getComandoIngles(){
-        return comandoIngles;
-    }
-    
-    /**
-     * Metodo para opterner el comando en español
-     * @return un string con el comando en español
-     */
-    public String getComandoEspanol(){
-        return comandoEspanol;
-    }
-    
-    /**
-     * Metodo para ver todos los comandos.
-     * @ return un string con todos los comandos 
-     */
-    public String allCommands(){
-        return  getComandoIngles()+", "+getComandoEspanol();
+    public String getComando(){
+        return comando;
     }
 }
