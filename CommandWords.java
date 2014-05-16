@@ -31,6 +31,14 @@ public class CommandWords
         validCommands.put("back",option.BACK);
         validCommands.put("take",option.TAKE);
         validCommands.put("drop",option.DROP);
+        validCommands.put("ir",option.GO);
+        validCommands.put("salir",option.QUIT);
+        validCommands.put("ayudar",option.HELP);
+        validCommands.put("mirar",option.LOOK);
+        validCommands.put("comer",option.EAT);
+        validCommands.put("volver",option.BACK);
+        validCommands.put("coger",option.TAKE);
+        validCommands.put("soltar",option.DROP);
     }
 
     /**
