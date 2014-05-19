@@ -20,6 +20,8 @@ public class Game
 {
     private Parser parser;
     private Player player;
+    private int timeCount;
+    private final int timeLimit = 5;
     /**
      * Create the game and initialise its internal map.
      */
@@ -28,6 +30,7 @@ public class Game
         player = new Player();
         createRooms();
         parser = new Parser();
+        timeCount = 0;
     }
 
     /**
@@ -121,6 +124,16 @@ public class Game
 
             case GO:
             goRoom(command);
+             if(player.getCurrentRoom().getDescription().equals("in exams clasroom")){
+                System.out.println("You win, You've come to the examination time");
+                wantToQuit = true;
+            }else{
+                timeCount++;
+                if(timeCount == timeLimit){
+                    System.out.println("You are lost, You havent´t come to the examination time");
+                    wantToQuit = true;
+                }
+            }
             break;
 
             case QUIT: 
