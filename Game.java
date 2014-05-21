@@ -21,7 +21,7 @@ public class Game
     private Parser parser;
     private Player player;
     private int timeCount;
-    private final int timeLimit = 5;
+    private final int TIME_LIMIT = 5;
     /**
      * Create the game and initialise its internal map.
      */
@@ -123,15 +123,18 @@ public class Game
             break;
 
             case GO:
-            goRoom(command);
-             if(player.getCurrentRoom().getDescription().equals("in exams clasroom")){
-                System.out.println("You win, You've come to the examination time");
-                wantToQuit = true;
-            }else{
-                timeCount++;
-                if(timeCount == timeLimit){
-                    System.out.println("You are lost, You havent´t come to the examination time");
+
+            boolean go = goRoom(command);
+            if(go){
+                if(player.getCurrentRoom().getDescription().equals("in exams clasroom")){
+                    System.out.println("You win, You've come to the examination time");
                     wantToQuit = true;
+                }else{
+                    timeCount++;
+                    if(timeCount == TIME_LIMIT){
+                        System.out.println("You are lost, You havent´t come to the examination time");
+                        wantToQuit = true;
+                    }
                 }
             }
             break;
@@ -184,16 +187,16 @@ public class Game
      * Try to go in one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
      */
-    private void goRoom(Command command) 
+    private boolean goRoom(Command command) 
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
             System.out.println("Go where?");
-            return;
         }
         String direction = command.getSecondWord();
-        // Try to leave current room.
-        player.move(direction);
+        // Try to leave current room. 
+        boolean goRoom= player.move(direction);
+        return goRoom;
     }
 
     /** 

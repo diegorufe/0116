@@ -188,7 +188,8 @@ public class Player{
     /**
      * Metodo por el cual el jugador se mueve de habitacion
      */
-    public void move(String direction){
+    public boolean move(String direction){
+        boolean move = false;
         Room nextRoom = getCurrentRoom().getExit(direction);
         if (nextRoom == null) {
             System.out.println("There is no door!");
@@ -198,7 +199,9 @@ public class Player{
             setLastRoom(lastRoom);
             setCurrentRoom(nextRoom);
             look();
+            move = true;
         }
+        return move;
     }
 
     /**
