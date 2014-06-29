@@ -19,7 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-
+    private Room lastRoom;
     /**
      * Create the game and initialise its internal map.
      */
@@ -127,7 +127,6 @@ public class Game
     private boolean processCommand(Command command) 
     {
         boolean wantToQuit = false;
-
         if(command.isUnknown()) {
             System.out.println("I don't know what you mean...");
             return false;
@@ -138,6 +137,7 @@ public class Game
             printHelp();
         }
         else if (commandWord.equals("go")) {
+            lastRoom = currentRoom;
             goRoom(command);
         }
         else if (commandWord.equals("quit")) {
@@ -146,6 +146,13 @@ public class Game
             printLocationInfo();
         }else if (commandWord.equals("eat")) {
             System.out.println("You have eaten now and you are not hungry any more");
+        }else if (commandWord.equals("back")) {
+            if(lastRoom == null){
+                System.out.println("There ins´t any place to return");
+            }else{
+                currentRoom = lastRoom;
+                printLocationInfo();
+            }
         }
 
         return wantToQuit;
