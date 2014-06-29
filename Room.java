@@ -18,15 +18,19 @@ public class Room
 {
     private HashMap<String,Room>rooms;
     private String description;
+    private String objectDescription;
+    private double objectWeigth;
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description) 
+    public Room(String description,String objectDescription,double objectWeigth) 
     {
         this.description = description;
+        this.objectDescription = objectDescription;
+        this.objectWeigth = objectWeigth;
         rooms = new HashMap<String,Room>();
     }
 
@@ -48,6 +52,22 @@ public class Room
         return description;
     }
 
+     /**
+     * @return The description of the object item.
+     */
+    public String getObjectDescription()
+    {
+        return objectDescription;
+    }
+    
+     /**
+     * @return The weigth of the object item.
+     */
+    public double getObjectWeigth()
+    {
+        return objectWeigth;
+    }
+    
     /**
      * @param direccion es la direccion mediante la cual queremos obtenera el atributo Room
      * @return the Room o null sino existe.
@@ -78,6 +98,7 @@ public class Room
      * @return A description of the room, including exits.
      */
     public String getLongDescription(){
-        return "You are in the "+getDescription()+",\n"+getExitString();
+        return "You are in the "+getDescription()+",\n"+"and there is an object that is "+getObjectDescription()+
+        "and the weight of the object is "+getObjectWeigth()+",\n"+getExitString();
     }
 }
