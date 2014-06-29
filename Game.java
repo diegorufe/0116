@@ -54,7 +54,7 @@ public class Game
      * Create all the rooms and link their exits together.
      */
     private void createRooms(){
-        Room dam,exams,secretariat,entrada,playground,gym;
+        Room dam,exams,secretariat,entrada,playground,gym,sotano;
 
         //Create rooms
         entrada = new Room("in entrance of the institute");
@@ -63,18 +63,20 @@ public class Game
         secretariat = new Room("in secretariat room, you´ve found the pump");
         playground = new Room("in the playground");
         gym = new Room("in the gym");
-
+        sotano = new Room("in the basement");
         // initialise room exits
         entrada.setExit("north",secretariat);
         entrada.setExit("east",exams);
         entrada.setExit("west", dam);
         entrada.setExit("southEast",playground);
         entrada.setExit("northWest",gym);
+        entrada.setExit("downLevel",sotano);
         dam.setExit("east",entrada);
         exams.setExit("west",entrada);
         secretariat.setExit("south",entrada);
         playground.setExit("west",entrada);
         gym.setExit("west",entrada);
+        sotano.setExit("runLevel", entrada);
 
         currentRoom = entrada;  // start game outside
     }
@@ -152,8 +154,7 @@ public class Game
         System.out.println("You are lost. You are alone. You wander");
         System.out.println("around at the university.");
         System.out.println();
-        System.out.println("Your command words are:");
-        System.out.println("   go quit help");
+        parser.getCommandWords().showAll();
     }
 
     /** 

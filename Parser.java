@@ -62,4 +62,18 @@ public class Parser
             return new Command(null, word2); 
         }
     }
+    
+    /**
+     * @return The next command from the class CommandWords.
+     */
+    public CommandWords getCommandWords(){
+        return commands;
+    }
+    
+    /**
+     * 
+     */
+    public void printCommands(){
+        commands.showAll();
+    }
 }
