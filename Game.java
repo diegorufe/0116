@@ -57,13 +57,20 @@ public class Game
         Room dam,exams,secretariat,entrada,playground,gym,sotano;
 
         //Create rooms
-        entrada = new Room("in entrance of the institute","Bin",4.0);
-        dam = new Room("in DAM classroom ","Pc-Computer",5.0);
-        exams = new Room("in exams clasroom","Table",1.5);
-        secretariat = new Room("in secretariat room, you´ve found the pump","Filing",10);
-        playground = new Room("in the playground","soccer goal",15);
-        gym = new Room("in the gym","Pad",1.5);
-        sotano = new Room("in the basement","Box",1);
+        entrada = new Room("in entrance of the institute");
+        entrada.addItem("Bin",4.0);
+        dam = new Room("in DAM classroom ");
+        dam.addItem("Pc-Computer",5.0);
+        exams = new Room("in exams clasroom");
+        exams.addItem("Table",1.5);
+        secretariat = new Room("in secretariat room, you´ve found the pump");
+        secretariat.addItem("Filing",10);
+        playground = new Room("in the playground");
+        playground.addItem("soccer goal",15);
+        gym = new Room("in the gym");
+        gym.addItem("Pad",1.5);
+        sotano = new Room("in the basement");
+        sotano.addItem("Box",1);
         // initialise room exits
         entrada.setExit("north",secretariat);
         entrada.setExit("east",exams);

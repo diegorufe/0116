@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Set;
+import java.util.ArrayList;
 /**
  * Class Room - a room in an adventure game.
  *
@@ -18,19 +19,17 @@ public class Room
 {
     private HashMap<String,Room>rooms;
     private String description;
-    private String objectDescription;
-    private double objectWeigth;
+    private ArrayList<Objet> objects;
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description,String objectDescription,double objectWeigth) 
+    public Room(String description) 
     {
         this.description = description;
-        this.objectDescription = objectDescription;
-        this.objectWeigth = objectWeigth;
+        objects = new ArrayList<Objet>();
         rooms = new HashMap<String,Room>();
     }
 
@@ -52,22 +51,6 @@ public class Room
         return description;
     }
 
-     /**
-     * @return The description of the object item.
-     */
-    public String getObjectDescription()
-    {
-        return objectDescription;
-    }
-    
-     /**
-     * @return The weigth of the object item.
-     */
-    public double getObjectWeigth()
-    {
-        return objectWeigth;
-    }
-    
     /**
      * @param direccion es la direccion mediante la cual queremos obtenera el atributo Room
      * @return the Room o null sino existe.
@@ -83,7 +66,7 @@ public class Room
      * @ return A description of the available exits.
      */
     public String getExitString(){
-        String exitString = "Exits: ";
+        String exitString = "Directions exits: ";
         Set<String> keys = rooms.keySet();
         for(String key:keys){
             exitString=exitString+key+" ";
@@ -98,7 +81,21 @@ public class Room
      * @return A description of the room, including exits.
      */
     public String getLongDescription(){
-        return "You are in the "+getDescription()+",\n"+"and there is an object that is "+getObjectDescription()+
-        "and the weight of the object is "+getObjectWeigth()+",\n"+getExitString();
+        String objectsDescription="";
+        if(objects.size()==0){
+            objectsDescription = "There isn´t any objects";
+        }else{
+            for(int i=0;i < objects.size();i++){
+                objectsDescription=objectsDescription+objects.get(i).toString();
+            }
+        }
+        return "You are in the "+getDescription()+",\n"+objectsDescription+",\n"+getExitString();
+    }
+
+    /**
+     * 
+     */
+    public void addItem(String description,double weigth){
+        objects.add(new Objet(description,weigth));
     }
 }
