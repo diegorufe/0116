@@ -94,6 +94,7 @@ public class Room
     
     /**
      * Metodo para obtener un item
+     * @return un objeto Objet 
      */
     public Objet getObjet(String description){
         Objet objeto = null;

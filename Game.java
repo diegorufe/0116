@@ -156,6 +156,8 @@ public class Game
                 currentRoom = lastRooms.pop();
                 printLocationInfo();
             }
+        } else if (commandWord.equals("take")) {
+            take(command);
         }
 
         return wantToQuit;
@@ -217,6 +219,22 @@ public class Game
         }
         else {
             return true;  // signal that we want to quit
+        }
+    }
+
+    /**
+     * 
+     */
+    private void take(Command command){
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("take what??");
+            return;
+        }
+        String description = command.getSecondWord();
+        if(currentRoom.getObjet(description)!=null){
+            player.addItem(currentRoom.getObjet(description));
+            printLocationInfo();
         }
     }
 
