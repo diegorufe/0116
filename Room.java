@@ -91,7 +91,22 @@ public class Room
         }
         return "You are in the "+getDescription()+",\n"+objectsDescription+",\n"+getExitString();
     }
-
+    
+    /**
+     * Metodo para obtener un item
+     */
+    public Objet getObjet(String description){
+        Objet objeto = null;
+        if(objects.size()>=1){
+            for(Objet item : objects){
+                if(item.getDescription().equals(description)){
+                    objeto = item;
+                }
+            }
+        }
+        return objeto;
+    }
+    
     /**
      * 
      */
