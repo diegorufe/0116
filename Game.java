@@ -21,6 +21,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Stack<Room>lastRooms;
+    private Player player;
     /**
      * Create the game and initialise its internal map.
      */
@@ -29,6 +30,7 @@ public class Game
         createRooms();
         parser = new Parser();
         lastRooms =  new Stack<Room>();
+        player = new Player();
     }
 
     /*private void createRooms()
@@ -223,6 +225,7 @@ public class Game
      */
     private void printLocationInfo(){
         System.out.println(currentRoom.getLongDescription());
+        System.out.println(player.itemsDescription());
         System.out.println();
     }
 }
