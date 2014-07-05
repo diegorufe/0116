@@ -39,6 +39,6 @@ public class Objet
      * 
      */
     public String toString(){
-        return "the object exit: "+getDescription()+", and their weigth: "+getWeigth();
+        return getDescription()+", and their weigth: "+getWeigth();
     }
 }

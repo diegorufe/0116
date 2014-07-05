@@ -81,12 +81,12 @@ public class Room
      * @return A description of the room, including exits.
      */
     public String getLongDescription(){
-        String objectsDescription="";
+        String objectsDescription="Object exits: ";
         if(objects.size()==0){
             objectsDescription = "There isn´t any objects";
         }else{
             for(int i=0;i < objects.size();i++){
-                objectsDescription=objectsDescription+objects.get(i).toString();
+                objectsDescription+="\n- "+objects.get(i).toString()+",";
             }
         }
         return "You are in the "+getDescription()+",\n"+objectsDescription+",\n"+getExitString();
@@ -113,5 +113,16 @@ public class Room
      */
     public void addItem(String description,double weigth){
         objects.add(new Objet(description,weigth));
+    }
+    
+    /**
+     * Metodo para borra items
+     */
+    public void removeItem(String description){
+          for(int i=0;i<objects.size();i++){
+                if(objects.get(i).getDescription().equals(description)){
+                   objects.remove(i);
+                }
+            }
     }
 }
