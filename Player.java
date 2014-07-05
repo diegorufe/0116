@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Collection;
 public class Player{
     private HashMap<String,Objet> items;
-    private static final double PESO_MAXIMO = 50;
+    private static final double PESO_MAXIMO = 10;
     public Player(){
         items = new HashMap<String,Objet>();
     }

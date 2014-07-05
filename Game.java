@@ -239,7 +239,8 @@ public class Game
             currentRoom.removeItem(description);
             printLocationInfo();
         }else{
-            System.err.println("There ins´t the item description");
+            System.out.println();
+            System.out.println("There ins´t the item description");
             System.out.println();
             printLocationInfo();
         }
