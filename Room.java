@@ -81,21 +81,48 @@ public class Room
      * @return A description of the room, including exits.
      */
     public String getLongDescription(){
-        String objectsDescription="";
+        String objectsDescription="Object exits: ";
         if(objects.size()==0){
             objectsDescription = "There isn´t any objects";
         }else{
             for(int i=0;i < objects.size();i++){
-                objectsDescription=objectsDescription+objects.get(i).toString();
+                objectsDescription+="\n- "+objects.get(i).toString()+",";
             }
         }
         return "You are in the "+getDescription()+",\n"+objectsDescription+",\n"+getExitString();
     }
-
+    
+    /**
+     * Metodo para obtener un item
+     * @return un objeto Objet 
+     */
+    public Objet getObjet(String description){
+        Objet objeto = null;
+        if(objects.size()>=1){
+            for(Objet item : objects){
+                if(item.getDescription().equals(description)){
+                    objeto = item;
+                }
+            }
+        }
+        return objeto;
+    }
+    
     /**
      * 
      */
     public void addItem(String description,double weigth){
         objects.add(new Objet(description,weigth));
+    }
+    
+    /**
+     * Metodo para borra items
+     */
+    public void removeItem(String description){
+          for(int i=0;i<objects.size();i++){
+                if(objects.get(i).getDescription().equals(description)){
+                   objects.remove(i);
+                }
+            }
     }
 }

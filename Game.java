@@ -156,6 +156,10 @@ public class Game
                 currentRoom = lastRooms.pop();
                 printLocationInfo();
             }
+        } else if (commandWord.equals("take")) {
+            take(command);
+        }  else if (commandWord.equals("drop")) {
+            drop(command);
         }
 
         return wantToQuit;
@@ -217,6 +221,50 @@ public class Game
         }
         else {
             return true;  // signal that we want to quit
+        }
+    }
+
+    /**
+     * Metodo para cojer obejtos del jugador
+     */
+    private void take(Command command){
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("take what??");
+            return;
+        }
+        String description = command.getSecondWord();
+        if(currentRoom.getObjet(description)!=null){
+            player.addItem(currentRoom.getObjet(description));
+            currentRoom.removeItem(description);
+            printLocationInfo();
+        }else{
+            System.out.println();
+            System.out.println("There ins´t the item description");
+            System.out.println();
+            printLocationInfo();
+        }
+    }
+
+    /**
+     * Metodo para quitar objetos del jugador
+     */
+    private void drop(Command command){
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("drop what??");
+            return;
+        }
+        String description = command.getSecondWord();
+        if(player.getObject(description)!=null){
+            currentRoom.addItem(player.getObject(description).getDescription(),player.getObject(description).getWeigth());
+            player.removeItem(description);
+            System.out.println();
+            printLocationInfo();
+        }
+        else{
+            System.out.println();
+            printLocationInfo();
         }
     }
 

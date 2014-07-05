@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Collection;
 public class Player{
     private HashMap<String,Objet> items;
-    private static final double PESO_MAXIMO = 50;
+    private static final double PESO_MAXIMO = 10;
     public Player(){
         items = new HashMap<String,Objet>();
     }
@@ -13,7 +13,7 @@ public class Player{
      */
     public Objet getObject(String nameItem){
         Objet item = null;
-        if(items.size() <=0 || !items.containsKey(nameItem)){
+        if(items.size() ==0 || !items.containsKey(nameItem)){
             System.out.println("No hay items que coger, o el numero introducido no es valido");
         }else{
             item = items.get(nameItem);
@@ -54,7 +54,7 @@ public class Player{
         }else{
             Collection<Objet> objetos = items.values();
             for(Objet item : objetos){
-                description += "\n"+item.getDescription()+" "+item.getWeigth();
+                description += "\n-"+item.toString();
             }
         }
         return description;
