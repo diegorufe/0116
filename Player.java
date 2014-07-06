@@ -1,10 +1,14 @@
 import java.util.HashMap;
 import java.util.Collection;
+import java.util.Stack;
 public class Player{
     private HashMap<String,Objet> items;
     private static final double PESO_MAXIMO = 10;
+    private Room currentRoom;
+    private Stack<Room>lastRooms;
     public Player(){
         items = new HashMap<String,Objet>();
+        lastRooms = new Stack<Room>();
     }
 
     /**
@@ -79,6 +83,42 @@ public class Player{
      */
     public double getMaxWeigth(){
         return PESO_MAXIMO;
+    }
+    
+    /**
+     * Metodo para fijar o actualizar habitaciones
+     */
+    public void setCurrentRoom(Room room){
+        currentRoom = room;
+    }
+    
+    /**
+     * Metodo para añadir habitaciones visitadas
+     */
+    public void setLastRoom(Room room){
+        lastRooms.push(room);
+    }
+    
+    /**
+     * Metodo para obtener la habitacion por defecto
+     */
+    public Room getCurrentRoom(){
+        return currentRoom;
+    }
+    
+    /**
+     * Metodo para obtener una de las habitaciones visitadas
+     * 
+     */
+    public Room getLastRoom(){
+       return lastRooms.pop();
+    }
+    
+    /**
+     * Metodo para obtener si ha habido habitaciones visitadas
+     */
+    public boolean isVistedRooms(){
+        return lastRooms.empty();
     }
 }
 

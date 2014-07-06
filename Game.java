@@ -19,18 +19,15 @@ import java.util.Stack;
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
-    private Stack<Room>lastRooms;
     private Player player;
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+        player = new Player();
         createRooms();
         parser = new Parser();
-        lastRooms =  new Stack<Room>();
-        player = new Player();
     }
 
     /*private void createRooms()
@@ -89,7 +86,7 @@ public class Game
         gym.setExit("west",entrada);
         sotano.setExit("runLevel", entrada);
 
-        currentRoom = entrada;  // start game outside
+        player.setCurrentRoom(entrada);  // start game outside
     }
 
     /**
@@ -150,10 +147,10 @@ public class Game
         }else if (commandWord.equals("eat")) {
             System.out.println("You have eaten now and you are not hungry any more");
         }else if (commandWord.equals("back")) {
-            if(lastRooms.empty()){
+            if(player.isVistedRooms()){
                 System.out.println("There ins´t any place to return");
             }else{
-                currentRoom = lastRooms.pop();
+                player.setCurrentRoom(player.getLastRoom());
                 printLocationInfo();
             }
         } else if (commandWord.equals("take")) {
@@ -196,14 +193,14 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
+        Room nextRoom = player.getCurrentRoom().getExit(direction);
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
         else {
-            Room lastRoom = currentRoom;
-            lastRooms.push(lastRoom);
-            currentRoom = nextRoom;
+            Room lastRoom = player.getCurrentRoom();
+            player.setLastRoom(lastRoom);
+            player.setCurrentRoom(nextRoom);
             printLocationInfo();
         }
     }
@@ -234,10 +231,10 @@ public class Game
             return;
         }
         String description = command.getSecondWord();
-        if(currentRoom.getObjet(description)!=null){
-            if(currentRoom.getObjet(description).getWeigth()+player.getWeigthItems() < player.getMaxWeigth()){
-                player.addItem(currentRoom.getObjet(description));
-                currentRoom.removeItem(description);
+        if(player.getCurrentRoom().getObjet(description)!=null){
+            if(player.getCurrentRoom().getObjet(description).getWeigth()+player.getWeigthItems() < player.getMaxWeigth()){
+                player.addItem(player.getCurrentRoom().getObjet(description));
+                player.getCurrentRoom().removeItem(description);
                 printLocationInfo();
             }else{
                 System.out.println();
@@ -264,7 +261,7 @@ public class Game
         }
         String description = command.getSecondWord();
         if(player.getObject(description)!=null){
-            currentRoom.addItem(player.getObject(description).getDescription(),player.getObject(description).getWeigth());
+            player.getCurrentRoom().addItem(player.getObject(description).getDescription(),player.getObject(description).getWeigth());
             player.removeItem(description);
             System.out.println();
             printLocationInfo();
@@ -279,7 +276,7 @@ public class Game
      * Metodo para evitar la repeticion de codigo e informar donde estamos situados
      */
     private void printLocationInfo(){
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(player.getCurrentRoom().getLongDescription());
         System.out.println(player.itemsDescription());
         System.out.println();
     }
