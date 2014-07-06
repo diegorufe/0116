@@ -30,27 +30,6 @@ public class Game
         parser = new Parser();
     }
 
-    /*private void createRooms()
-    {
-    Room outside, theater, pub, lab, office;
-
-    // create the rooms
-    outside = new Room("outside the main entrance of the university");
-    theater = new Room("in a lecture theater");
-    pub = new Room("in the campus pub");
-    lab = new Room("in a computing lab");
-    office = new Room("in the computing admin office");
-
-    // initialise room exits
-    outside.setExits(null, theater, lab, pub);
-    theater.setExits(null, null, null, outside);
-    pub.setExits(null, outside, null, null);
-    lab.setExits(outside, office, null, null);
-    office.setExits(null, null, null, lab);
-
-    currentRoom = outside;  // start game outside
-    }*/
-
     /**
      * Create all the rooms and link their exits together.
      */
@@ -117,7 +96,7 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        printLocationInfo();
+        player.look();
     }
 
     /**
@@ -143,22 +122,16 @@ public class Game
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }else if (commandWord.equals("look")) {
-            printLocationInfo();
+            player.look();
         }else if (commandWord.equals("eat")) {
-            System.out.println("You have eaten now and you are not hungry any more");
+            player.remenberEat();
         }else if (commandWord.equals("back")) {
-            if(player.isVistedRooms()){
-                System.out.println("There ins´t any place to return");
-            }else{
-                player.setCurrentRoom(player.getLastRoom());
-                printLocationInfo();
-            }
+            player.returnRoom();
         } else if (commandWord.equals("take")) {
             take(command);
         }  else if (commandWord.equals("drop")) {
             drop(command);
         }
-
         return wantToQuit;
     }
 
@@ -189,20 +162,9 @@ public class Game
             System.out.println("Go where?");
             return;
         }
-
         String direction = command.getSecondWord();
-
         // Try to leave current room.
-        Room nextRoom = player.getCurrentRoom().getExit(direction);
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
-        }
-        else {
-            Room lastRoom = player.getCurrentRoom();
-            player.setLastRoom(lastRoom);
-            player.setCurrentRoom(nextRoom);
-            printLocationInfo();
-        }
+        player.move(direction);
     }
 
     /** 
@@ -223,6 +185,7 @@ public class Game
 
     /**
      * Metodo para cojer obejtos del jugador
+     *  @param command The command to be processed.
      */
     private void take(Command command){
         if(!command.hasSecondWord()) {
@@ -231,27 +194,12 @@ public class Game
             return;
         }
         String description = command.getSecondWord();
-        if(player.getCurrentRoom().getObjet(description)!=null){
-            if(player.getCurrentRoom().getObjet(description).getWeigth()+player.getWeigthItems() < player.getMaxWeigth()){
-                player.addItem(player.getCurrentRoom().getObjet(description));
-                player.getCurrentRoom().removeItem(description);
-                printLocationInfo();
-            }else{
-                System.out.println();
-                System.out.println("There ins´t support more than weigth object");
-                System.out.println();
-                printLocationInfo();
-            }
-        }else{
-            System.out.println();
-            System.out.println("There ins´t the item description");
-            System.out.println();
-            printLocationInfo();
-        }
+        player.take(description);
     }
 
     /**
      * Metodo para quitar objetos del jugador
+     *  @param command The command to be processed.
      */
     private void drop(Command command){
         if(!command.hasSecondWord()) {
@@ -260,24 +208,6 @@ public class Game
             return;
         }
         String description = command.getSecondWord();
-        if(player.getObject(description)!=null){
-            player.getCurrentRoom().addItem(player.getObject(description).getDescription(),player.getObject(description).getWeigth());
-            player.removeItem(description);
-            System.out.println();
-            printLocationInfo();
-        }
-        else{
-            System.out.println();
-            printLocationInfo();
-        }
-    }
-
-    /**
-     * Metodo para evitar la repeticion de codigo e informar donde estamos situados
-     */
-    private void printLocationInfo(){
-        System.out.println(player.getCurrentRoom().getLongDescription());
-        System.out.println(player.itemsDescription());
-        System.out.println();
+        player.drop(description);
     }
 }

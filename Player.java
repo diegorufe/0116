@@ -84,41 +84,133 @@ public class Player{
     public double getMaxWeigth(){
         return PESO_MAXIMO;
     }
-    
+
     /**
      * Metodo para fijar o actualizar habitaciones
      */
     public void setCurrentRoom(Room room){
         currentRoom = room;
     }
-    
+
     /**
      * Metodo para añadir habitaciones visitadas
      */
     public void setLastRoom(Room room){
         lastRooms.push(room);
     }
-    
+
     /**
      * Metodo para obtener la habitacion por defecto
+     * @return la habitacion por defecto 
      */
     public Room getCurrentRoom(){
         return currentRoom;
     }
-    
+
     /**
      * Metodo para obtener una de las habitaciones visitadas
-     * 
+     * @return la ultima habitacion visitada
      */
     public Room getLastRoom(){
-       return lastRooms.pop();
+        return lastRooms.pop();
     }
-    
+
     /**
      * Metodo para obtener si ha habido habitaciones visitadas
      */
     public boolean isVistedRooms(){
         return lastRooms.empty();
+    }
+
+    /**
+     * Metodo para saber los datos de la habitacion por defecto 
+     */
+    public void look(){
+        System.out.println(currentRoom.getLongDescription());
+        System.out.println(itemsDescription());
+        System.out.println();
+    }
+
+    /**
+     * Metodo que nos devuelve un objeto de la habitacion por defecto
+     * @return nos devuelve un objeto de la habitacion por defecto
+     */
+    public Objet itemCurrentRoom(String description){
+        return currentRoom.getObjet(description);
+    }
+
+    /**
+     * Metodo para cojer objetos
+     */
+    public void take(String description){
+        if(getCurrentRoom().getObjet(description)!=null){
+            if(itemCurrentRoom(description).getWeigth()+getWeigthItems() < getMaxWeigth()){
+                addItem(itemCurrentRoom(description));
+                getCurrentRoom().removeItem(description);
+                look();
+            }else{
+                System.out.println();
+                System.out.println("There ins´t support more than weigth object");
+                System.out.println();
+                look();
+            }
+        }else{
+            System.out.println();
+            System.out.println("There ins´t the item description");
+            System.out.println();
+            look();
+        }
+    }
+
+    /**
+     * Metodo para dejar objetos 
+     */
+    public void drop(String description){
+        if(getObject(description)!=null){
+            getCurrentRoom().addItem(getObject(description).getDescription(),getObject(description).getWeigth());
+            removeItem(description);
+            System.out.println();
+            look();
+        }
+        else{
+            System.out.println();
+            look();
+        }
+    }
+
+    /**
+     * Metodo para que muestre por pantalla  que el jugador tiene que comer. 
+     */
+    public void remenberEat(){
+        System.out.println("You have eaten now and you are not hungry any more");
+    }
+
+    /**
+     * Metodo por el cual el jugador se mueve de habitacion
+     */
+    public void move(String direction){
+        Room nextRoom = getCurrentRoom().getExit(direction);
+        if (nextRoom == null) {
+            System.out.println("There is no door!");
+        }
+        else {
+            Room lastRoom = getCurrentRoom();
+            setLastRoom(lastRoom);
+            setCurrentRoom(nextRoom);
+            look();
+        }
+    }
+
+    /**
+     * Metodo para volver a habitaciones pasadas
+     */
+    public void returnRoom(){
+        if(isVistedRooms()){
+            System.out.println("There ins´t any place to return");
+        }else{
+            setCurrentRoom(getLastRoom());
+            look();
+        }
     }
 }
 
