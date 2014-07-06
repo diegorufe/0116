@@ -25,7 +25,7 @@ public class Player{
      * Metodo para anadir un objeto
      */
     public void addItem(Objet item){
-        if(getWeigthItems()+ item.getWeigth() >=PESO_MAXIMO){
+        if(getWeigthItems()+ item.getWeigth() >=getMaxWeigth()){
             System.out.println("No puedes añadir objetos que superen "+PESO_MAXIMO+" Kilogramos");
         }else{
             items.put(item.getDescription(),item);
@@ -71,6 +71,14 @@ public class Player{
             weigthItems += item.getWeigth();
         }
         return  weigthItems;
+    }
+
+    /**
+     * Metodo que nos devuelve el peso maximo que puede soportar el jugador
+     * @return el peso maximo que puede sportar el jugador
+     */
+    public double getMaxWeigth(){
+        return PESO_MAXIMO;
     }
 }
 

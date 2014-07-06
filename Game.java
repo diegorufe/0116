@@ -235,9 +235,16 @@ public class Game
         }
         String description = command.getSecondWord();
         if(currentRoom.getObjet(description)!=null){
-            player.addItem(currentRoom.getObjet(description));
-            currentRoom.removeItem(description);
-            printLocationInfo();
+            if(currentRoom.getObjet(description).getWeigth()+player.getWeigthItems() < player.getMaxWeigth()){
+                player.addItem(currentRoom.getObjet(description));
+                currentRoom.removeItem(description);
+                printLocationInfo();
+            }else{
+                System.out.println();
+                System.out.println("There ins´t support more than weigth object");
+                System.out.println();
+                printLocationInfo();
+            }
         }else{
             System.out.println();
             System.out.println("There ins´t the item description");
